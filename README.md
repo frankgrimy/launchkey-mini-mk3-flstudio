@@ -35,3 +35,27 @@ If you did it all good, the device pads might change colors and you'll be ready 
 For reference, there's a screenshot below that resumes the settings, so you can compare with.
 
 ![Suggested MIDI settings](Suggested%20MIDI%20settings.png)
+
+## Functions manual
+
+Please read the [Manual](MANUAL.md).
+
+## Supported plugins
+
+Currently, the API only supports generator plugins.
+The script supports the following plugins:
+
+Image-Line plugins:
+
+- [FLEX](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/plugins/FLEX.htm)
+- [Harmor](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/plugins/Harmor.htm)
+- [Sytrus](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/plugins/Sytrus.htm)
+- [__MIDI Out__](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/plugins/MIDI%20Out.htm)
+
+Third-party plugins:
+
+- [Cardinal](https://github.com/DISTRHO/Cardinal)
+- [Massive](https://www.native-instruments.com/en/products/komplete/synths/massive/)
+- [Pigments 3](https://www.arturia.com/products/software-instruments/pigments/overview)
+- [Surge XT](https://surge-synthesizer.github.io/)
+- [Vital](https://vital.audio/)
