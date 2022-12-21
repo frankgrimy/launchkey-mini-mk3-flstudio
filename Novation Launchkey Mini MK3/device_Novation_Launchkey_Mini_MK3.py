@@ -75,6 +75,7 @@ def OnIdle():
     ShortLights()
     peakMonitor()
 
+
 def OnDeInit():         # Gets back to Standalone mode after exiting FL Studio.
     if device.isAssigned():
         device.midiOutMsg(0xBF, 0, 0x73, 0x00)
@@ -132,6 +133,7 @@ def OnNoteOn(padhit):
         upperpads.DrumLights()
         lowerpads.DrumLights()
     Shortcuts(padhit.midiId, padhit.data1, padhit.data2)
+    #velocityCurves(padhit.midiId, padhit.data1, padhit.data2)
 
     padhit.handled = handlers.PadHandler(padhit.midiId, padhit.data1)
 

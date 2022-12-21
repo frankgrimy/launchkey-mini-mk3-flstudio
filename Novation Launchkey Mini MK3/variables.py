@@ -63,3 +63,5 @@ currentTime = None
 repeatqueue = {}
 repeatok = {}
 
+keysVelo = 1
+padsVelo = 1
