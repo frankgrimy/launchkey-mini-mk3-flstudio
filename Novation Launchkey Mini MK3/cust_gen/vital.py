@@ -19,10 +19,7 @@ def Knobs(midiId, data1, data2):
                                     if data1 == x:
                                         if plugins.getParamName(211, channumber, -1) == "Macro 1":
                                             plugins.setParamValue(math2.linnormalize(data2,127,1,0),211+x-21,channumber,-1)
-                                            ui.setHintMsg("(" + plugins.getPluginName(channumber, -1, 1) + ") " + "Controlling Macro " + str(x-20))
-                                            value = (plugins.getParamValue(211, channumber, -1))
-                                            #ui.setHintMsg("Macro 1: " + str(math2.linnormalize(value, 1016, 1, 0)))
-                                            #print(value)
+                                            ui.setHintMsg("(" + plugins.getPluginName(channumber, -1, 1) + ") " + "Controlling Macro " + str(x-20) + ": " + str(math2.truncate(plugins.getParamValue(211+x-21, channumber, -1)*100, 1)) + "%")
                                 else:
                                     if data1 == x:
                                         handled = True
