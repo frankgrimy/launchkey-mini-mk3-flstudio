@@ -17,9 +17,7 @@ def PadModes(midiId, data1, data2):
                 elif data2 == cons.drumpad_DATA2:
                     var.PADSTATUS = "Drum"
                     ui.setHintMsg("Pads are now in DRUM mode!")
-                    for x in pads.drum_lowerpads.values():
-                        device.midiOutMsg(0x99, 0, x, colors.EMPTYWHITE)
-                    for x in pads.drum_upperpads.values():
+                    for x in pads.drum_pads.values():
                         device.midiOutMsg(0x99, 0, x, colors.EMPTYWHITE)
                     
                 elif data2 == cons.custompad_DATA2:

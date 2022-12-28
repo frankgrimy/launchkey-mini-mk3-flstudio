@@ -12,7 +12,7 @@ from mxr import levelmon
 from mixer import trackNumber as number, getTrackPeaks as peaks, isTrackMuted as muted, trackCount as count
 
 
-def Shortcuts(midiId, data1, data2): ### This is a fast implementation of the editor window.
+def Shortcuts(midiId, data1, data2): ### This is a brief implementation of the editor mode.
     if var.SCENE_SEL == "Editor":
         if not var.scmodes.get("EDITOR_READYFOR"):
             if midiId == midi.MIDI_NOTEON:

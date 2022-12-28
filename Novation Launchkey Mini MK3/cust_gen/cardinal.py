@@ -17,10 +17,6 @@ def Knobs(midiId, data1, data2):
                             plugins.setParamValue(math2.linnormalize(data2,127,1,0), 2080+data1-21, channumber, -1)
                             if data1 in tuple(knobs.knobs.values())[0:9]:
                                 ui.setHintMsg("(" + plugins.getPluginName(channumber, -1, 1) + ") " + "Controlling Parameter " + str(data1-20))
-                            
-                            #elif data1 in tuple(knobs.knobs.values())[4:9]:
-                            #    env = ("Envelope Attack", "Envelope Decay", "Envelope Sustain", "Envelope Release")
-                            #    ui.setHintMsg("(" + plugins.getPluginName(channumber, -1, 1) + ") " + "Controlling " + env[data1-25])
                     
 def Handled():
     return handled

@@ -1,4 +1,4 @@
-### Panning and volume
+### Panning and volume controls for Mixer and Channel Rack scenes.
 import math
 import specialmath as math2
 import mixer

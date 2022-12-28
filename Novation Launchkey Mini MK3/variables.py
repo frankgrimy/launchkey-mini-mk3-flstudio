@@ -1,7 +1,6 @@
 import device
 
 PORT=device.getPortNumber()     # Save controller's assigned port as the PORT variable. May be useful.
-#AUTO_SWITCH_TO_CONTROLLED_PARAMETER = True
 
 """
 Remember that MIDI info require three bytes (which is the same as three hexadecimal pairs, e.g. AA BB CC;
@@ -33,35 +32,32 @@ The next sections define specific bytes that might act as those AAs, BBs or CCs,
 
 SHIFT_STATUS = False
 FOCUS_STATUS = 0
-MIXER_READYFOR = ""
-PLAYLIST_READYFOR = ""
-CHANRACK_READYFOR = ""
-PIANOROLL_READYFOR = ""
-WAITFORINPUT = ""
+MIXER_READYFOR = "" # This variable determines the status of the Stop/Solo/Mute buttons in Mixer mode.
+PLAYLIST_READYFOR = "" # This variable determines the status of the Stop/Solo/Mute buttons in Playlist mode.
+CHANRACK_READYFOR = "" # This variable determines the status of the Stop/Solo/Mute buttons in Channel Rack mode.
+PIANOROLL_READYFOR = "" # This variable determines the status of the Stop/Solo/Mute buttons in Piano Roll mode.
+WAITFORINPUT = "" 
 KNOBSTATUS = ""
 PADSTATUS = ""
-SCENE_SEL = "Mixer"
-#SCENE_SEL = "Playlist"
+SCENE_SEL = "Mixer" # Default scene. Can be "Mixer", "Channel Rack" and "Editor".
 SCENEUP_STATUS=""
 
 
-crRectPos = 0
+crRectPos = 0 # This variable determines the position of the Channel Rack's rectangle.
 
 
-#sespad1_DATA1 = 96
-
-scmodes = {"MIXER_READYFOR":"","PLAYLIST_READYFOR":"", "CHANRACK_READYFOR":"", "PIANOROLL_READYFOR":"", "EDITOR_READYFOR":"", 'MONITOR_READYFOR':''}
+scmodes = {"MIXER_READYFOR":"","PLAYLIST_READYFOR":"", "CHANRACK_READYFOR":"", "PIANOROLL_READYFOR":"", "EDITOR_READYFOR":"", 'MONITOR_READYFOR':''}  # This dict determines the status of the Stop/Solo/Mute buttons in each mode.
 
 # For shortcut lights in Editor mode.
 shortpress = ""
 shortdata = ""
 
 
-currentTime = None
+currentTime = None # This variable shows the current time (EPOCH).
 
 
-repeatqueue = {}
-repeatok = {}
+#repeatqueue = {}
+#repeatok = {}
 
 keysVelo = 1
 padsVelo = 1
