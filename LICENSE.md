@@ -33,7 +33,7 @@ Based on the [DON'T BE A DICK PUBLIC LICENSE](https://github.com/philsturgeon/db
  
  5. The licensor has the right to modify or change this license in case of (but is not limited to):  
 	 6a. A contradiction between these terms is found.  
-     6b. Some MOTHERFUCKING dick is abusing these terms (as stated in 1.d).
+     6b. Some MOTHERFUCKING dick is abusing these terms (as stated in 1.d).  
  If some licensee is being affected negatively by this license, the licensee can ask the licensor for license modifications.  
  Even if the request is reasonable, the licensor can choose to modify the license or not.  
  In case of the last one, then the licensor is a LAZY ASS dick, but no liability is applicable under any circumstance.  
