@@ -1,4 +1,4 @@
-#   name=Novation Launchkey Mini MK3 (by Frank Grimy) v1.0.0
+#   name=Novation Launchkey Mini MK3 (by Frank Grimy)
 #   url=https://forum.image-line.com/viewtopic.php?f=1994&t=260133
 #   supportedDevices=MIDIIN2 (Launchkey Mini MK3 MID,Launchkey Mini MK3 DAW Port
 
@@ -13,7 +13,7 @@ import upperpadsactions as upact, crlowpads as crlp, transportbuttons as trns
 from cust_gen import *
 from fruity_gen import *
 
-import pl.controls as plctrl
+#import pl.controls as plctrl
 import mxr.embdeq
 from editors.shortcuts import *
 from time import time
@@ -85,7 +85,7 @@ def OnIdle(): # Functionality that runs in the background. This lets the script 
     #plctrl.MuteLights()
     
     ShortLights() # Shortcuts lights for Editor mode.
-    peakMonitor() # Peak meter monitoring (Editor mode).
+    peakMonitor() # Peak meter monitor (Editor mode).
 
 
 def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs operations (CC). This data is passed to FL Studio, and it does stuff with it.
@@ -96,7 +96,6 @@ def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs opera
     pkm.KnobModes(event.midiId, event.data1, event.data2) # Knob modes (Shift + Device/Volume/Pan/Custom pads). Defines variable KNOBSTATUS and prints a hint in FL Studio.
     pkm.PadModes(event.midiId, event.data1, event.data2) # Pad modes (Shift + Session/Drum/Custom pads). Defines variable PADSTATUS and prints a hint in FL Studio.
     
-    #if  channels.getChannelType(channels.channelNumber()) == 2:
     
     # Knob integrations for plugins.
     ## Generators
@@ -118,9 +117,6 @@ def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs opera
     #plctrl.MuteTracks(event.data1, event.data2) # Non-functional playlist mute tracks.
     
 
-    
-#def OnProgramChange(event):
-#    print (str(hex(event.midiId)) + " " + str(event.data1))
 
 def OnNoteOn(padhit): # Functionality to integrate pads operations (Note On). This data is passed to FL Studio, and it does stuff with it.
     
@@ -184,10 +180,11 @@ def OnControlChange(scene):
                     channel = pv.PanVol(scene.data1, scene.data2, channels.selectedChannel(), channels.channelCount(), var.SCENE_SEL, knobs.knobs)
                     channel.Vol()
       
-    scene.handled = handlers.SceneHandler(scene.midiId, scene.data1)
-    sceneup.UpBehavior(scene.midiId, scene.data1, scene.data2)
-    sceneup.UpColorsPush(scene.midiId, scene.data1)
+    scene.handled = handlers.SceneHandler(scene.midiId, scene.data1) # If a CC is integrated, then FL Studio will show a yellow icon.
+    sceneup.UpBehavior(scene.midiId, scene.data1, scene.data2) # Up button behavior.
+    sceneup.UpColorsPush(scene.midiId, scene.data1) # Up button colors.
 
+    # Mixer rectangle indicator.
     if var.SCENE_SEL == "Mixer":
         if scene.data1 and scene.data2:
             Rectangle()
