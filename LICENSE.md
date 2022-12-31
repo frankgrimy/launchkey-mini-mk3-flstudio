@@ -2,7 +2,7 @@
 
 Based on the [DON'T BE A DICK PUBLIC LICENSE](https://github.com/philsturgeon/dbad)
 
-> Version 1.3, December 2022
+> Version 1.2+grimy.1, December 2022
 
 > Copyright (C) [2022] [Francisco González]
  
