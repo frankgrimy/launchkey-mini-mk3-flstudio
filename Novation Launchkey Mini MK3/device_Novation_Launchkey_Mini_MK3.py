@@ -1,4 +1,4 @@
-#   name=Novation Launchkey Mini MK3 (by Frank Grimy)
+#   name=Novation Launchkey Mini MK3 (by Frank Grimy) v1.3.1
 #   url=https://forum.image-line.com/viewtopic.php?f=1994&t=260133
 #   supportedDevices=MIDIIN2 (Launchkey Mini MK3 MID,Launchkey Mini MK3 DAW Port
 
