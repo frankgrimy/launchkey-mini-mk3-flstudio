@@ -17,10 +17,9 @@ from fruity_gen import *
 import mxr.embdeq
 from editors.shortcuts import *
 from time import time
-#from mxr.levelmon import peakMonitor
-
 
 apiver4script=23 # Scripting API version compatible with this script.
+
 
 def OnInit():           # Set up "DAW mode" in the controller after linking the script to the controller. RTFM to know why is this important!
     if general.getVersion() >= apiver4script:
