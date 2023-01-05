@@ -7,10 +7,9 @@ def Knobs(midiId, data1, data2):
     global handled
     handled = ""
     
-    if var.SCENE_SEL == "Channel rack":
-        if var.KNOBSTATUS == "Device":
+    if plugins.getPluginName(channumber, -1) == "Vital":
+        if var.SCENE_SEL == "Channel rack" and var.KNOBSTATUS == "Device":
             if plugins.isValid(channumber, -1):
-                if plugins.getPluginName(channumber, -1) == "Vital":
                     if midiId == midi.MIDI_CONTROLCHANGE:
                         if not var.SHIFT_STATUS:
                             for x in knobs.knobs.values():
