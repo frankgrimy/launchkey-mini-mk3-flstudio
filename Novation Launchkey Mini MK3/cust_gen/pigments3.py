@@ -7,8 +7,8 @@ def Knobs(midiId, data1, data2):
     global handled
     handled = False
 
-    if plugins.getPluginName(channumber, -1) == "Pigments":
-        if var.SCENE_SEL == "Channel rack" and var.KNOBSTATUS == "Device" and plugins.isValid(channumber):
+    if plugins.isValid(channumber) and plugins.getPluginName(channumber, -1) == "Pigments":
+        if var.SCENE_SEL == "Channel rack" and var.KNOBSTATUS == "Device":
             if midiId == midi.MIDI_CONTROLCHANGE:
                 if not var.SHIFT_STATUS:
                     if data1 in tuple(knobs.knobs.values())[0:9]:
