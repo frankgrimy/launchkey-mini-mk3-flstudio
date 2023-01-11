@@ -8,7 +8,7 @@ from general import undo, undoUp
 from device import midiOutMsg, midiOutSysex as sysex
 import colors
 from time import time, time_ns
-from mxr import levelmon
+#from mxr import levelmon
 from mixer import trackNumber as number, getTrackPeaks as peaks, isTrackMuted as muted, trackCount as count
 
 
