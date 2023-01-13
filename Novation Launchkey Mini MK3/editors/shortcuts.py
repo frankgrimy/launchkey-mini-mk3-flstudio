@@ -91,10 +91,6 @@ def ShortLights():
             midiOutMsg(0x92, 0, pads.sespad13_DATA1, 0)
             midiOutMsg(0x92, 0, pads.sespad14_DATA1, 0)
 
-#def MonitorLights(level):
-#    if var.SCENE_SEL == "Editor" and var.scmodes.get("EDITOR_READYFOR") == "Stop":
-#        if level 
-
 def peakMonitor():
     if var.SCENE_SEL == "Editor":
         if var.scmodes.get("EDITOR_READYFOR") == "Stop":
