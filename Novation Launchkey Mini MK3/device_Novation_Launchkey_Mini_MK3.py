@@ -78,7 +78,7 @@ def OnIdle(): # Functionality that runs in the background. This lets the script 
     crlp.LowerLights()
 
 ### Step-sequencer lights
-    step.SeqLights()
+    #step.SeqLights()
 
 ### Playlist track mute state
     #plctrl.MuteLights()
@@ -114,7 +114,7 @@ def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs opera
     mxr.embdeq.setMixerEQGain(event.data1, mixer.trackNumber(),0,event.data2) # Mixer embedded EQ controls.
     
     #plctrl.MuteTracks(event.data1, event.data2) # Non-functional playlist mute tracks.
-    
+    step.SeqLights()
 
 
 def OnNoteOn(padhit): # Functionality to integrate pads operations (Note On). This data is passed to FL Studio, and it does stuff with it.
@@ -187,3 +187,8 @@ def OnControlChange(scene):
     if var.SCENE_SEL == "Mixer":
         if scene.data1 and scene.data2:
             Rectangle()
+
+# def OnRefresh(HW_Dirty_Mixer_Controls):
+#     # trackx = [number, name, volume, pan, mute, arm, fxStatus]
+#     # You can query the status of any mixer track by calling Insert(track number).property    
+
