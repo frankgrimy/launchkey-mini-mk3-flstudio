@@ -61,3 +61,4 @@ currentTime = None # This variable shows the current time (EPOCH).
 
 keysVelo = 1
 padsVelo = 1
+fxStatus = 1
