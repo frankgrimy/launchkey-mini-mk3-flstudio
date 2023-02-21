@@ -3,9 +3,10 @@
 #   supportedDevices=MIDIIN2 (Launchkey Mini MK3 MID,Launchkey Mini MK3 DAW Port
 
 # Import list
-import midi, mixer, ui, channels
+import timers
+import midi, mixer, channels
 from mxr.mirectangle import Rectangle
-import pads, knobs, mixerlowpads, sceneup, browse, handlers
+import pads, knobs, mixerlowpads, browse, handlers
 import variables as var, constants as cons, drumpads as drum, stepsequencer as step, panvol as pv, scenedown as scdown
 import uimessages as uimsg, scenedownlights as downlight, upperpadslights as uplights, padknobmodes as pkm
 import upperpadsactions as upact, crlowpads as crlp, transportbuttons as trns
@@ -18,6 +19,8 @@ from time import time
 from deinit import QuitFL
 from initialize import Startup
 from windowfocus import WindowFocus
+from sceneup import UpMidi, UpColor, UpColorsIdle
+
 apiver4script=23 # Scripting API version compatible with this script.
 
 def OnInit():
@@ -28,6 +31,7 @@ def OnDeInit():
 
 
 def OnIdle(): # Functionality that runs in the background. This lets the script to give feedback to the user in real time and in context.
+    UpColor
     uplights.Padlights() # Upper pads + transport lighting.
     var.currentTime = time() # Sets the current time for the script.
     WindowFocus() # Detects the focused window in FL Studio.
@@ -36,7 +40,7 @@ def OnIdle(): # Functionality that runs in the background. This lets the script 
     downlight.Downbutton()
 
 ### Colors for Scene-up button
-    sceneup.UpColorsIdle()
+    UpColorsIdle()
 
 ### Lower pads colors for Mixer mode!
     mixerlowpads.LowerLights()
@@ -45,7 +49,7 @@ def OnIdle(): # Functionality that runs in the background. This lets the script 
     crlp.LowerLights()
 
 ### Step-sequencer lights
-    #step.SeqLights()
+    step.SeqLights()
 
 ### Playlist track mute state
     #plctrl.MuteLights()
@@ -55,7 +59,7 @@ def OnIdle(): # Functionality that runs in the background. This lets the script 
 
 
 def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs operations (CC). This data is passed to FL Studio, and it does stuff with it.
-    sceneup.UpPushed(event.midiId, event.data1, event.data2) # Scene-up button behavior.
+    UpMidi.OnMidiMsg(event.midiId, event.data1, event.data2) # Scene-up button behavior.
     trns.TrBehavior(event.midiId, event.data1, event.data2) # Transport buttons behavior.
     browse.Arrowkeys(event.midiId, event.data1, event.data2) # Arrow keys behavior (Shift + Arrow buttons).
     
@@ -147,8 +151,8 @@ def OnControlChange(scene):
                     channel.Vol()
       
     scene.handled = handlers.SceneHandler(scene.midiId, scene.data1) # If a CC is integrated, then FL Studio will show a yellow icon.
-    sceneup.UpBehavior(scene.midiId, scene.data1, scene.data2) # Up button behavior.
-    sceneup.UpColorsPush(scene.midiId, scene.data1) # Up button colors.
+    #sceneup.UpBehavior(scene.midiId, scene.data1, scene.data2) # Up button behavior.
+    #sceneup.UpColorsPush(scene.midiId, scene.data1) # Up button colors.
 
     # Mixer rectangle indicator.
     if var.SCENE_SEL == "Mixer":
