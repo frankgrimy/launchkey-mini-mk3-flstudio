@@ -6,6 +6,7 @@ import colors
 import midi
 import ui
 import device
+from time import time
 
 ### Scene selector.
 def UpBehavior(midiId, data1, data2):
@@ -82,3 +83,33 @@ def UpPushed(midiId, data1, data2):
                 var.SCENEUP_STATUS=1
             else:
                 var.SCENEUP_STATUS=0
+
+
+class SceneUpColor(): # Controls up button colors on idle.
+    def OnIdle(self):
+        UpColorsIdle()
+
+UpColor = SceneUpColor()
+
+class SceneUpMidi(): # Controls up button behavior at/after push.
+    def OnMidiMsg(self, midiId, data1, data2):
+        nowtime = None
+        while data2:
+            nowtime = time()
+            if nowtime - var.currentTime > 1:
+                print("1 second press")
+                break
+            else:
+                print("pressing")
+                continue
+
+    # def OnMidiMsg(midiId, data1, data2):
+    #     UpBehavior(midiId, data1, data2)
+    #     UpPushed(midiId, data1, data2)
+    #     UpColorsPush(midiId, data1)
+    
+
+
+UpMidi = SceneUpMidi()
+
+
