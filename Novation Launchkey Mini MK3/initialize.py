@@ -34,8 +34,8 @@ class Init():
             print("Attempting to start anyway...")
             Initialize()
 
-        if isAssigned():
-            midiOutMsg(0xBF, 0, 0x09, 0x01)
+        # if isAssigned():
+        #     midiOutMsg(0xBF, 0, 0x09, 0x01)
 
 
 Startup = Init()
