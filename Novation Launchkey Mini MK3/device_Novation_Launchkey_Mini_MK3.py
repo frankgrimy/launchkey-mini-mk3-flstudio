@@ -3,7 +3,7 @@
 #   supportedDevices=MIDIIN2 (Launchkey Mini MK3 MID,Launchkey Mini MK3 DAW Port
 
 # Import list
-import midi, device, transport, mixer, general, ui, playlist, channels, plugins
+import midi, device, mixer, general, ui, channels
 from mxr.mirectangle import Rectangle
 import pads, knobs, mixerlowpads, sceneup, browse, handlers
 import variables as var, constants as cons, drumpads as drum, stepsequencer as step, panvol as pv, scenedown as scdown
