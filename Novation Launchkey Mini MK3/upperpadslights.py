@@ -58,7 +58,7 @@ def Padlights():
     if transport.isPlaying():
         device.midiOutMsg(0xb2,0, 0x73, 0x03)
     else:
-        device.midiOutMsg(0xb1,0, 0x73, 0x7f)
+        device.midiOutMsg(0xb0,0, 0x73, 0x02)
 
     if transport.isRecording():
         device.midiOutMsg(0xb2, 0, 0x75, 0x03)
