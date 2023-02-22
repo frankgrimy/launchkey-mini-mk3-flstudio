@@ -3,7 +3,6 @@
 #   supportedDevices=MIDIIN2 (Launchkey Mini MK3 MID,Launchkey Mini MK3 DAW Port
 
 # Import list
-import timers
 import midi, mixer, channels
 from mxr.mirectangle import Rectangle
 import pads, knobs, mixerlowpads, browse, handlers
@@ -19,7 +18,7 @@ from time import time
 from deinit import QuitFL
 from initialize import Startup
 from windowfocus import WindowFocus
-from sceneup import UpMidi, UpColor, UpColorsIdle
+from sceneup import SceneUpMidi, UpColor, UpColorsIdle
 
 apiver4script=23 # Scripting API version compatible with this script.
 
@@ -59,7 +58,9 @@ def OnIdle(): # Functionality that runs in the background. This lets the script 
 
 
 def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs operations (CC). This data is passed to FL Studio, and it does stuff with it.
-    UpMidi.OnMidiMsg(event.midiId, event.data1, event.data2) # Scene-up button behavior.
+    #UpMidi.OnIdle(event.midiId, event.data1, event.data2) # Scene-up button behavior.
+    #SceneUpMidi.OnIdle(event.midiId, event.data1, event.data2) # Scene-up button behavior.
+    SceneUpMidi(event, 0.15)
     trns.TrBehavior(event.midiId, event.data1, event.data2) # Transport buttons behavior.
     browse.Arrowkeys(event.midiId, event.data1, event.data2) # Arrow keys behavior (Shift + Arrow buttons).
     

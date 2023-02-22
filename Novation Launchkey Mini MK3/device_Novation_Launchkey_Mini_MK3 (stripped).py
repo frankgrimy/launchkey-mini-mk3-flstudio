@@ -18,8 +18,8 @@ from time import time
 from deinit import QuitFL
 from initialize import Startup
 from windowfocus import WindowFocus
-from sceneup import UpMidi, UpColor, UpColorsIdle
-from time import time
+from sceneup import UpColor, UpColorsIdle
+from time import time, sleep
 
 apiver4script=23 # Scripting API version compatible with this script.
 
@@ -30,17 +30,99 @@ def OnDeInit():
     QuitFL.OnDeInit()
 
 def OnIdle():
-    var.currentTime = time()
+    var.currentTime = time() # Keep track of time
 
-# Up button
-def OnMidiMsg(event):
-    if event.data1 == cons.sceneup_DATA1:
-        nowtime = None
-        while event.data2:
-            # timestamp for the last event
-            nowtime = time()
-            if nowtime - var.currentTime > 1:
-                print("yay")
-                break
+# # Button
+# def OnMidiMsg(event):
+#     if event.data1 == cons.sceneup_DATA1: # If the desired button is pressed...
+#         pushtime = None # Timestamp for the button press
+#         while event.data2: # While the button is pressed...
+#             # timestamp for the last event
+#             pushtime = time() # Create a timestamp for the button press
+#             if pushtime - var.currentTime > 0.5: # If the button is pressed for more than 1 second...
+#                 print("Long press detected") # Print a message to the console
+#                 break # Break the loop
+#             else:
+#                 if event.data2:
+#                     sleep(0.1)
+#                     continue
+#                 else:
+#                     print("Short press detected")
+#                     break
+
+# def OnMidiMsg(event):
+#     if event.data1 == cons.sceneup_DATA1: # If the desired button is pressed...
+#         pushtime = None # Timestamp for the button press
+#         while True: # While the button is pressed...
+#             if event.data2:
+#                 pushtime = time() # Create a timestamp for the button press
+#                 if pushtime - var.currentTime > 0.5: # If the button is pressed for more than 1 second...
+#                     print("Long press detected") # Print a message to the console
+#                     break # Break the loop
+#                 else:
+#                     if event.data2:
+#                         sleep(0.1)
+#                         continue
+#                     else:
+#                         print("Short press detected")
+#                         break
+
+pushTime = 0
+relTime = 0
+class HoldButton():
+    def OnIdle(event):
+        global pushTime, relTime
+        # isPushed = False
+        # isReleased = False
+        # pushTime = None
+        # relTime = None
+        # # if event.data2:
+        # #     pushTime = time()
+        # #     if event.data1 == cons.sceneup_DATA1:
+        # #         print("Button is held")
+        # #         print(str(pushTime) + " " + str(var.currentTime) + " " + str(pushTime - var.currentTime))
+        # #     else:
+        # #         print("Button is not held")
+        # if event.data1 == cons.sceneup_DATA1:
+        #     while True:
+        #         if event.data2:
+        #             isPushed = True
+        #             pushTime = time()
+        #             if pushTime - var.currentTime > 0.5:
+        #                 sleep(0.1)
+        #                 print("Long press detected")
+        #                 break
+        #         elif not event.data2 and isPushed:
+        #             isReleased = True
+        #             relTime = time()
+        #             print(relTime-pushTime)
+        #             if relTime - pushTime < 0.5:
+        #                 print("Short press detected")
+        #                 sleep(0.1)
+        #                 break
+        #         else:
+        #             break
+        # pushTime = None
+        # relTime = None
+        if event.data1 == cons.sceneup_DATA1:
+            if event.data2:
+                pushTime = time()
+                # print("Push: ", pushTime, "Release: ", relTime)
+            elif not event.data2:
+                relTime = time()
+                # print("Push: ", pushTime, "Release: ", relTime)
+            if relTime - pushTime > 0.25 and pushTime != 0 and relTime != 0:
+                print("Long press detected")
+                pushTime = 0
+                relTime = 0
+            elif relTime - pushTime <= 0.25 and pushTime != 0 and relTime != 0:
+                print("Short press detected")
+                pushTime = 0
+                relTime = 0
             else:
-                continue
+                pass
+
+
+
+def OnMidiMsg(event):
+    HoldButton.OnIdle(event)
