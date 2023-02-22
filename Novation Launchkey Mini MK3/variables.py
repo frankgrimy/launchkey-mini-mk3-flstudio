@@ -63,3 +63,6 @@ keysVelo = 1
 padsVelo = 1
 fxStatus = 1
 mixerFx = {}
+
+pushTime = 0
+releaseTime = 0
