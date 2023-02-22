@@ -13,7 +13,7 @@ This script should be compatible with the latest FL Studio version, for both Win
 
 Download the code and copy the _Novation Launchkey Mini MK3_ folder in FL Studio [__User Data Folder__](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/envsettings_files.htm#userdata)/Settings/Hardware.
 
-For Windows, you can copy this address and access it from the File Explorer address bar:
+For Windows, if you haven't modified FL Studio's default User Data Folder, you can copy this address and access it from the File Explorer address bar:
 > %USERPROFILE%\Documents\Image-Line\FL Studio\Settings\Hardware
 
 ## Configuration
@@ -42,7 +42,7 @@ Please read the [Manual](MANUAL.md).
 
 ## Supported plugins
 
-Currently, the API only supports generator plugins.
+Currently, the API only supports generator plugins (a.k.a Synths, or the ones that can be loaded in the Channel Rack).
 The script supports the following plugins:
 
 Image-Line plugins:
