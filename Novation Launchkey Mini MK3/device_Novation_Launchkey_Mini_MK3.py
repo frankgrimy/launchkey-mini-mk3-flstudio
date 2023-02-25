@@ -18,9 +18,9 @@ from time import time
 from deinit import QuitFL
 from initialize import Startup
 from windowfocus import WindowFocus
-from sceneup import SceneUpMidi, UpColor, UpColorsIdle
+from sceneup import SceneUpMidi, UpColorsPush, UpColorsIdle
+from longPress import Hold
 
-apiver4script=23 # Scripting API version compatible with this script.
 
 def OnInit():
     Startup.OnInit()
@@ -30,9 +30,10 @@ def OnDeInit():
 
 
 def OnIdle(): # Functionality that runs in the background. This lets the script to give feedback to the user in real time and in context.
-    UpColor
-    uplights.Padlights() # Upper pads + transport lighting.
     var.currentTime = time() # Sets the current time for the script.
+    Hold(0.25) # Detects if the Scene-up button is being held.
+    UpColorsPush()
+    uplights.Padlights() # Upper pads + transport lighting.
     WindowFocus() # Detects the focused window in FL Studio.
     
 ### Colors for Scene Down button
@@ -58,9 +59,7 @@ def OnIdle(): # Functionality that runs in the background. This lets the script 
 
 
 def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs operations (CC). This data is passed to FL Studio, and it does stuff with it.
-    #UpMidi.OnIdle(event.midiId, event.data1, event.data2) # Scene-up button behavior.
-    #SceneUpMidi.OnIdle(event.midiId, event.data1, event.data2) # Scene-up button behavior.
-    SceneUpMidi(event, 0.15)
+    SceneUpMidi(event)
     trns.TrBehavior(event.midiId, event.data1, event.data2) # Transport buttons behavior.
     browse.Arrowkeys(event.midiId, event.data1, event.data2) # Arrow keys behavior (Shift + Arrow buttons).
     
@@ -71,17 +70,21 @@ def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs opera
     # Knob integrations for plugins.
     ## Generators
     ### Third-party plugins 
-    vital.Knobs(event.midiId, event.data1, event.data2) 
-    pigments3.Knobs(event.midiId, event.data1, event.data2)
-    surge.Knobs(event.midiId, event.data1, event.data2)
-    cardinal.Knobs(event.midiId, event.data1, event.data2)
-    massive.Knobs(event.midiId, event.data1, event.data2)
+    for i in ("vital", "pigments3", "surge", "cardinal", "massive"):
+        eval(i).Knobs(event.midiId, event.data1, event.data2)
+    # vital.Knobs(event.midiId, event.data1, event.data2) 
+    # pigments3.Knobs(event.midiId, event.data1, event.data2)
+    # surge.Knobs(event.midiId, event.data1, event.data2)
+    # cardinal.Knobs(event.midiId, event.data1, event.data2)
+    # massive.Knobs(event.midiId, event.data1, event.data2)
 
     ### FL Studio native plugins
-    flex.Knobs(event.midiId, event.data1, event.data2)
-    sytrus.Knobs(event.midiId, event.data1, event.data2)
-    harmor.Knobs(event.midiId, event.data1, event.data2)
-    midiout.Knobs(event.midiId, event.data1, event.data2)
+    for i in ("flex", "sytrus", "harmor", "midiout"):
+        eval(i).Knobs(event.midiId, event.data1, event.data2)
+    # flex.Knobs(event.midiId, event.data1, event.data2)
+    # sytrus.Knobs(event.midiId, event.data1, event.data2)
+    # harmor.Knobs(event.midiId, event.data1, event.data2)
+    # midiout.Knobs(event.midiId, event.data1, event.data2)
     
     mxr.embdeq.setMixerEQGain(event.data1, mixer.trackNumber(),0,event.data2) # Mixer embedded EQ controls.
     

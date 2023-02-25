@@ -65,4 +65,8 @@ fxStatus = 1
 mixerFx = {}
 
 pushTime = 0
-releaseTime = 0
+holdTime = 0
+isLongPress = 0
+holdMidiId = 0
+holdData1 = 0
+isPushed = 0

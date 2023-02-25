@@ -90,6 +90,7 @@ def UpBehavior(direction):
 ### Colors on push.
 def UpColorsPush():
     if not var.SHIFT_STATUS:
+        if var.isPushed:
         # if midiId == midi.MIDI_CONTROLCHANGE:
         #     if data1 == cons.sceneup_DATA1:
                 if var.SCENEUP_STATUS:
@@ -182,25 +183,41 @@ UpColor = SceneUpColor()
 
 #UpMidi = SceneUpMidi()
 
-def SceneUpMidi(event, timeDelta):
+# def SceneUpMidi(event, timeDelta):
+#     if event.midiId == midi.MIDI_CONTROLCHANGE:
+#         if event.data1 == cons.sceneup_DATA1:
+#             if event.data2:
+#                 var.pushTime = time()
+#                 UpPushed(1)
+#                 UpColorsPush()
+#             elif not event.data2:
+#                 var.releaseTime = time()
+#                 UpPushed(0)
+#                 if var.releaseTime - var.pushTime < timeDelta and var.pushTime != 0 and var.releaseTime != 0:
+#                     var.pushTime = 0
+#                     var.releaseTime = 0
+#                     UpBehavior(0)
+#                 elif var.releaseTime - var.pushTime >= timeDelta and var.pushTime != 0 and var.releaseTime != 0:
+#                     UpBehavior(1)
+#                     #UpPushed(event.midiId, event.data1, event.data2)
+#                     var.pushTime = 0
+#                     var.releaseTime = 0
+#                 else:
+#                     pass
+
+def SceneUpMidi(event):
     if event.midiId == midi.MIDI_CONTROLCHANGE:
         if event.data1 == cons.sceneup_DATA1:
             if event.data2:
-                var.pushTime = time()
-                UpPushed(1)
-                UpColorsPush()
-            elif not event.data2:
-                var.releaseTime = time()
+                var.isPushed = 1
+                UpPushed(1)  
+                if not var.pushTime:
+                    var.pushTime = time() # Set pushTime to the time the button was pushed.
+            else:    
+                #var.pushTime = 0 # Reset pushTime to 0.
                 UpPushed(0)
-                if var.releaseTime - var.pushTime < timeDelta and var.pushTime != 0 and var.releaseTime != 0:
-                    var.pushTime = 0
-                    var.releaseTime = 0
-                    UpBehavior(0)
-                elif var.releaseTime - var.pushTime >= timeDelta and var.pushTime != 0 and var.releaseTime != 0:
-                    UpBehavior(1)
-                    #UpPushed(event.midiId, event.data1, event.data2)
-                    var.pushTime = 0
-                    var.releaseTime = 0
-                else:
-                    pass
+                var.isPushed = 0
+    
+    
+
 
