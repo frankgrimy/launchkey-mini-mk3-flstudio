@@ -1,4 +1,4 @@
-import midi, mixer, ui, variables as var
+import mixer, ui, variables as var
 
 def Rectangle(): # Display rectangle on mixer.
     mxr = mixer.trackNumber() 
