@@ -1,5 +1,4 @@
 from general import getVersion
-from device_Novation_Launchkey_Mini_MK3 import apiver4script
 import constants as cons
 from time import time
 from device import isAssigned, midiOutMsg
@@ -21,21 +20,21 @@ def Initialize():
 
 class Init():
     def OnInit(self):
-        if getVersion() >= apiver4script:
+        if getVersion() >= cons.apiver4script:
             Initialize()
             cons.startTime = time()
         else:
             print("")
             print ("This script might not be supported in this FL Studio version.")
             print ("Please upgrade to version 20.9.2 (build 2963 for Windows, or MacOS equivalent) or higher."), print("")
-            print("Scripting API version needed:", end=" "), print(apiver4script)
+            print("Scripting API version needed:", end=" "), print(cons.apiver4script)
             print("Scripting API version installed:", end=" "), print(getVersion())
             print("")
             print("Attempting to start anyway...")
             Initialize()
 
-        # if isAssigned():
-        #     midiOutMsg(0xBF, 0, 0x09, 0x01)
+        if isAssigned():
+            midiOutMsg(0xBF, 0, 0x09, 0x01) # Set the knobs default target to Volume.
 
 
 Startup = Init()
