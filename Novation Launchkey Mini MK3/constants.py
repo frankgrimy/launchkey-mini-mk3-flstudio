@@ -53,3 +53,6 @@ monitor = {
     'PAD7': '0',
     'PAD8': '0'
 }
+
+
+apiver4script=23 # Scripting API version compatible with this script.
