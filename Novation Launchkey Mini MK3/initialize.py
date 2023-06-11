@@ -7,7 +7,7 @@ from variables import PORT
 
 def Initialize():
     if isAssigned():
-        print(""), print("Novation Launchkey Mini MK3 script by Frank Grimy (@neso_boiii)"), print("")
+        print(""), print("Novation Launchkey Mini MK3 script by Frank Grimy (@frank.grimy)"), print("")
     try:
         midiOutMsg(159,0,12,127) # Set the controller in DAW mode, by sending the appropriate MIDI message.
     except:
