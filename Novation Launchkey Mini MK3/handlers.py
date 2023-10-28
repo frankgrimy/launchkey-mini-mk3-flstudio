@@ -52,7 +52,7 @@ def SceneHandler(midiId, data1): # Handler for CC messages.
             if not var.SHIFT_STATUS:
                 if eval(i):
                     handled = True
-        if embdeq.Handled():
-            handled = True
+        #if embdeq.Handled(): # Comment disables the embedded EQ in mixer mode.
+        #    handled = True
     
     return handled
