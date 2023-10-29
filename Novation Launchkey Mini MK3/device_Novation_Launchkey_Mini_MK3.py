@@ -12,7 +12,9 @@ import upperpadsactions as upact, crlowpads as crlp, transportbuttons as trns
 from cust_gen import *
 from fruity_gen import *
 
-import mxr.embdeq
+from cust_fx import *
+
+#import mxr.embdeq
 from editors.shortcuts import *
 from time import time
 from deinit import QuitFL
@@ -20,6 +22,7 @@ from initialize import Startup
 from windowfocus import WindowFocus
 from sceneup import SceneUpMidi, UpColorsPush, UpColorsIdle
 from longPress import Hold
+#import plugins
 
 
 def OnInit():
@@ -31,7 +34,7 @@ def OnDeInit():
 
 def OnIdle(): # Functionality that runs in the background. This lets the script to give feedback to the user in real time and in context.
     var.currentTime = time() # Sets the current time for the script.
-    Hold(0.25) # Detects if the Scene-up button is being held.
+    Hold(0.250) # Detects if the Scene-up button is being held.
     UpColorsPush()
     uplights.Padlights() # Upper pads + transport lighting.
     WindowFocus() # Detects the focused window in FL Studio.
@@ -59,6 +62,11 @@ def OnIdle(): # Functionality that runs in the background. This lets the script 
 
 
 def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs operations (CC). This data is passed to FL Studio, and it does stuff with it.
+    """if event.data2:
+        pluginCoords = mixer.getActiveEffectIndex() # This prints the coordinates of the active effect in the mixer (tuple).
+        if pluginCoords:
+            print(plugins.getParamCount(pluginCoords[0], pluginCoords[1])) # This prints the name of the active effect in the mixer."""
+    
     SceneUpMidi(event)
     trns.TrBehavior(event.midiId, event.data1, event.data2) # Transport buttons behavior.
     browse.Arrowkeys(event.midiId, event.data1, event.data2) # Arrow keys behavior (Shift + Arrow buttons).
@@ -70,7 +78,7 @@ def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs opera
     # Knob integrations for plugins.
     ## Generators
     ### Third-party plugins 
-    for i in ("vital", "pigments3", "surge", "cardinal", "massive"):
+    for i in ("vital", "pigments3", "surge", "cardinal", "massive", "phaseplant"):
         eval(i).Knobs(event.midiId, event.data1, event.data2)
     # vital.Knobs(event.midiId, event.data1, event.data2) 
     # pigments3.Knobs(event.midiId, event.data1, event.data2)
@@ -86,7 +94,12 @@ def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs opera
     # harmor.Knobs(event.midiId, event.data1, event.data2)
     # midiout.Knobs(event.midiId, event.data1, event.data2)
     
-    mxr.embdeq.setMixerEQGain(event.data1, mixer.trackNumber(),0,event.data2) # Mixer embedded EQ controls.
+    """for i in ("pro_l2"):
+        eval(i).Knobs(event.midiId, event.data1, event.data2)"""
+    
+    pro_l2.Knobs(event.midiId, event.data1, event.data2)
+
+    #mxr.embdeq.setMixerEQGain(event.data1, mixer.trackNumber(),0,event.data2) # Mixer embedded EQ controls.
     
     #plctrl.MuteTracks(event.data1, event.data2) # Non-functional playlist mute tracks.
     step.SeqLights()
@@ -162,3 +175,6 @@ def OnControlChange(scene):
     if var.SCENE_SEL == "Mixer":
         if scene.data1 and scene.data2:
             Rectangle()
+
+def OnRefresh(HW_Dirty_LEDs):
+        fxDetect.pluginInfo().OnRefresh() # Prints the name of the selected plugin from the mixer. Is expected to be used in the future to create plugin controls.
