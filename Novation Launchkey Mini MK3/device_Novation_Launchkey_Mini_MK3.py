@@ -12,7 +12,9 @@ import upperpadsactions as upact, crlowpads as crlp, transportbuttons as trns
 from cust_gen import *
 from fruity_gen import *
 
-from cust_fx import *
+from cust_fxctrl import *
+import fruity_fxctrl
+from fruity_fxctrl import *
 
 #import mxr.embdeq
 from editors.shortcuts import *
@@ -80,26 +82,31 @@ def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs opera
     ### Third-party plugins 
     for i in ("vital", "pigments3", "surge", "cardinal", "massive", "phaseplant"):
         eval(i).Knobs(event.midiId, event.data1, event.data2)
-    # vital.Knobs(event.midiId, event.data1, event.data2) 
-    # pigments3.Knobs(event.midiId, event.data1, event.data2)
-    # surge.Knobs(event.midiId, event.data1, event.data2)
-    # cardinal.Knobs(event.midiId, event.data1, event.data2)
-    # massive.Knobs(event.midiId, event.data1, event.data2)
 
-    ### FL Studio native plugins
-    for i in ("flex", "sytrus", "harmor", "midiout"):
+    ### FL Studio native generator plugins
+    for i in ("flex",
+              "sytrus",
+              "harmor",
+              "midiout"):
         eval(i).Knobs(event.midiId, event.data1, event.data2)
-    # flex.Knobs(event.midiId, event.data1, event.data2)
-    # sytrus.Knobs(event.midiId, event.data1, event.data2)
-    # harmor.Knobs(event.midiId, event.data1, event.data2)
-    # midiout.Knobs(event.midiId, event.data1, event.data2)
-    
-    """for i in ("pro_l2"):
-        eval(i).Knobs(event.midiId, event.data1, event.data2)"""
-    
-    pro_l2.Knobs(event.midiId, event.data1, event.data2)
 
-    #mxr.embdeq.setMixerEQGain(event.data1, mixer.trackNumber(),0,event.data2) # Mixer embedded EQ controls.
+    ## Effects
+    ### Third-party plugins
+    for i in ("pro_l2",
+              "khs_gain"):
+        eval(i).Knobs(event.midiId, event.data1, event.data2)
+    
+    ### FL Studio native effect plugins
+    for i in ("freq_shifter",
+              "love_philter",
+              "param_eq2",
+              "fruity_limiter",
+              "control_surface"):
+        if i in dir(fruity_fxctrl):
+            eval(i).Knobs(event.midiId, event.data1, event.data2)
+
+
+    #mxr.embdeq.setMixerEQGain(event.data1, mixer.trackNumber(),0,event.data2) # Mixer embedded EQ controls. Deprecated
     
     #plctrl.MuteTracks(event.data1, event.data2) # Non-functional playlist mute tracks.
     step.SeqLights()
@@ -177,4 +184,4 @@ def OnControlChange(scene):
             Rectangle()
 
 def OnRefresh(HW_Dirty_LEDs):
-        fxDetect.pluginInfo().OnRefresh() # Prints the name of the selected plugin from the mixer. Is expected to be used in the future to create plugin controls.
+        fxDetect.pluginInfo().OnRefresh() # Sets var.focusedPlugin to the active effect in the mixer, including its coordinates.
