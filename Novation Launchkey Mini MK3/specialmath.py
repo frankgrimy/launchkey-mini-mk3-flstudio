@@ -9,7 +9,9 @@ def linearize(x, x1, y1, x2, y2, n):
     y = m*x+n
     return y
 
-def linnormalize(x, x2, y2, n):
+def linnormalize(x: int, x2: int, y2: int, n: int) -> int:
+    """Linear normalization function. Transforms a value from one range to another.\n
+    """
     m = y2/x2
     y = m*x+n
     return y
