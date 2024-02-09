@@ -1,4 +1,4 @@
-#   name=Novation Launchkey Mini MK3 (by Frank Grimy) v1.4.0
+#   name=Novation Launchkey Mini MK3 (by Frank Grimy) v1.4.1
 #   url=https://forum.image-line.com/viewtopic.php?f=1994&t=260133
 #   supportedDevices=MIDIIN2 (Launchkey Mini MK3 MID,Launchkey Mini MK3 DAW Port
 
@@ -36,7 +36,7 @@ def OnDeInit():
 
 def OnIdle(): # Functionality that runs in the background. This lets the script to give feedback to the user in real time and in context.
     var.currentTime = time() # Sets the current time for the script.
-    Hold(0.250) # Detects if the Scene-up button is being held.
+    Hold(0.250) # Detects if the Scene-up button is being held, during 250 milliseconds.
     UpColorsPush()
     uplights.Padlights() # Upper pads + transport lighting.
     WindowFocus() # Detects the focused window in FL Studio.
@@ -61,6 +61,8 @@ def OnIdle(): # Functionality that runs in the background. This lets the script 
     
     ShortLights() # Lights for shortcuts in Editor mode.
     peakMonitor() # Peak meter monitor (Editor mode).
+
+    var.isPlaying = transport.isPlaying() # Detects if FL Studio is playing.
 
 
 def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs operations (CC). This data is passed to FL Studio, and it does stuff with it.
@@ -104,13 +106,9 @@ def OnMidiMsg(event): # Functionality to integrate buttons, pads and knobs opera
               "control_surface"):
         if i in dir(fruity_fxctrl):
             eval(i).Knobs(event.midiId, event.data1, event.data2)
-
-
-    #mxr.embdeq.setMixerEQGain(event.data1, mixer.trackNumber(),0,event.data2) # Mixer embedded EQ controls. Deprecated
     
     #plctrl.MuteTracks(event.data1, event.data2) # Non-functional playlist mute tracks.
     step.SeqLights()
-
 
 def OnNoteOn(padhit): # Functionality to integrate pads operations (Note On). This data is passed to FL Studio, and it does stuff with it.
     
@@ -131,7 +129,6 @@ def OnNoteOn(padhit): # Functionality to integrate pads operations (Note On). Th
         drumpads.DrumLights()
     
     Shortcuts(padhit.midiId, padhit.data1, padhit.data2) # Integrate messages to provide shortcuts in Editor mode.
-    #velocityCurves(padhit.midiId, padhit.data1, padhit.data2)
 
     padhit.handled = handlers.PadHandler(padhit.midiId, padhit.data1) # If a pad is integrated, then FL Studio will show a yellow icon.
 

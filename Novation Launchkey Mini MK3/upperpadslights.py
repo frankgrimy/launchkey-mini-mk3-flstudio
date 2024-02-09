@@ -28,18 +28,27 @@ def Padlights():
         device.midiOutMsg(0x90,0,0x63,70)
 
     if ui.getVisible(2):
-        device.midiOutMsg(0x92,0,pads.sespad5_DATA1,colors.ORANGE2)
+        if var.isPlaying:
+            device.midiOutMsg(0x92,0,pads.sespad5_DATA1,colors.ORANGE2)
+        else:   
+            device.midiOutMsg(0x90,0,pads.sespad5_DATA1,colors.ORANGE2)
     else:
         device.midiOutMsg(0x90,0,pads.sespad5_DATA1,70)
 
     if ui.getVisible(1):
-        device.midiOutMsg(0x92,0,pads.sespad6_DATA1,colors.ORANGE2)
+        if var.isPlaying:
+            device.midiOutMsg(0x92,0,pads.sespad6_DATA1,colors.ORANGE2)
+        else:   
+            device.midiOutMsg(0x90,0,pads.sespad6_DATA1,colors.ORANGE2)
     else:
         device.midiOutMsg(0x90,0,pads.sespad6_DATA1,70)
 
     if not (var.SCENE_SEL== "Channel rack" and var.scmodes.get("CHANRACK_READYFOR") == "Stop"):
         if ui.getVisible(3):
-            device.midiOutMsg(0x92,0,pads.sespad7_DATA1,colors.ORANGE2)
+            if var.isPlaying:
+                device.midiOutMsg(0x92,0,pads.sespad7_DATA1,colors.ORANGE2)
+            else:
+                device.midiOutMsg(0x90,0,pads.sespad7_DATA1,colors.ORANGE2)
         else:
             device.midiOutMsg(0x90,0,pads.sespad7_DATA1,70)
     else:
@@ -48,7 +57,10 @@ def Padlights():
 
     if not (var.SCENE_SEL== "Channel rack" and var.scmodes.get("CHANRACK_READYFOR") == "Stop"):
         if ui.getVisible(0):
-            device.midiOutMsg(0x92,0,pads.sespad8_DATA1,colors.ORANGE2)
+            if var.isPlaying:
+                device.midiOutMsg(0x92,0,pads.sespad8_DATA1,colors.ORANGE2)
+            else:
+                device.midiOutMsg(0x90,0,pads.sespad8_DATA1,colors.ORANGE2)
         else:
             device.midiOutMsg(0x90,0,pads.sespad8_DATA1,70)
     else:

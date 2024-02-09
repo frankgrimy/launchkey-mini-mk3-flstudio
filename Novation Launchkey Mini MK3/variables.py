@@ -72,3 +72,5 @@ holdData1 = 0
 isPushed = 0
 
 focusedPlugin = ["", None, None] # First item is the plugin name, second is the plugin index1, third is the plugin index2.
+
+isPlaying = None # This variable determines if FL Studio is playing or not.
