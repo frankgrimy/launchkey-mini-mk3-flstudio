@@ -46,6 +46,7 @@ CCP1 = 0x15
 UNRE = 0x5E
 UNRE1 = 0x5F
 
+# Colors for level monitor
 LEVLOW = 0x4C
 LEVMID = 0x0D
 LEVHI = 0X09
