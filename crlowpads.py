@@ -1,9 +1,12 @@
+# Channel rack lower pads functions
 import colors
 import pads
 import variables as var
 import channels
 import device
 import ui
+import colPalette as col
+
 def LowerLights():
     chan = channels.selectedChannel()
     if var.SCENE_SEL == "Channel rack" and not var.scmodes.get("CHANRACK_READYFOR") == "Stop":
@@ -16,9 +19,9 @@ def LowerLights():
                 elif var.scmodes.get("CHANRACK_READYFOR") == "Solo" and not channels.isChannelSolo(chan+x-112):
                     device.midiOutMsg(0x90, 0, x, colors.GREEN1)
                 elif var.scmodes.get("CHANRACK_READYFOR") == "Mute" and not channels.isChannelSolo(chan+x-112):
-                        device.midiOutMsg(0x90, 0, x, colors.GREEN1)
+                    device.midiOutMsg(0x90, 0, x, colors.GREEN1)
                 elif var.scmodes.get("CHANRACK_READYFOR") == "":
-                        device.midiOutMsg(0x90, 0, x, colors.GREEN1)
+                    device.midiOutMsg(0x90, 0, x, col.channelColorNumber(chan+x-112)) # Colored pads according to the channel color.
             else: device.midiOutMsg(0x90, 0, x, 0)
 
 def LowerPadsControls(data1, data2, CRMODE):

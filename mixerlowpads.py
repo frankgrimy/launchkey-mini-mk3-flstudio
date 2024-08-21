@@ -5,6 +5,7 @@ import mixer
 import device
 import colors
 import ui
+import colPalette as col
 
 def LowerLights():
     if var.SCENE_SEL == "Mixer":
@@ -23,7 +24,8 @@ def LowerLights():
                     elif var.MIXER_READYFOR == "Mute" and not mixer.isTrackSolo(mixer.trackNumber()+x-112):
                         device.midiOutMsg(0x90, 0, x, colors.GREEN1)
                     else:
-                        device.midiOutMsg(0x90, 0, x, colors.GREEN1)
+                        #device.midiOutMsg(0x90, 0, x, colors.GREEN1)
+                        device.midiOutMsg(0x90, 0, x, col.mixerColorNumber(mixer.trackNumber()+x-112)) # Colored pads according to the mixer track color.
                 
                 else: device.midiOutMsg(0x90, 0, x, 0)
 
