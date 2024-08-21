@@ -66,7 +66,7 @@ def Padlights():
     else:
         device.midiOutMsg(0x92,0,pads.sespad8_DATA1,colors.crRectSel)
 
-
+def transportLights():
     if transport.isPlaying():
         device.midiOutMsg(0xb2,0, 0x73, 0x03)
     else:
