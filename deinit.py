@@ -1,3 +1,4 @@
+# Run when the controller is disconnected from FL Studio
 import device
 
 class DeInit():
