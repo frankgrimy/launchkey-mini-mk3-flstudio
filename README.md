@@ -5,7 +5,7 @@ Despite this, the script tries to preserve the _performance_ capabilities that t
 
 This script should be compatible with the latest FL Studio version, for both Windows and MacOS (and might even work with Linux/Wine).
 
-![Launchkey Mini MK3 front image](Launchkey%20Mini%20MK3.png)
+![Launchkey Mini MK3 front image](./Info/Launchkey%20Mini%20MK3.png)
 
 &nbsp;
 
@@ -34,11 +34,11 @@ If you did it all good, the device pads might change colors and you'll be ready 
 
 For reference, there's a screenshot below that resumes the settings, so you can compare with.
 
-![Suggested MIDI settings](Suggested%20MIDI%20settings.png)
+![Suggested MIDI settings](./Info/Suggested%20MIDI%20settings.png)
 
 ## Functions manual
 
-Please read the [Manual](MANUAL.md).
+Please read the [Manual](./Info/MANUAL.md).
 
 ## Supported plugins
 
