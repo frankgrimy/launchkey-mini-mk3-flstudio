@@ -6,39 +6,47 @@ import transport
 import ui
 from mixer import trackCount as count, enableTrackSlots as fxEnable, isTrackSlotsEnabled as fxStatus
 
-def TrBehavior(midiId, data1, data2):
-    if midiId == midi.MIDI_CONTROLCHANGE:
-            if data1 == cons.shift_DATA1:
-                if data2 == 127:
+def TrBehavior(event):
+
+#def TrBehavior(midiId, data1, data2):
+    if event.midiId == midi.MIDI_CONTROLCHANGE:
+            if event.data1 == cons.shift_DATA1:
+                if event.data2 == 127:
                     var.SHIFT_STATUS = True
-                    
+                    event.handled = True      
                 else:
                     var.SHIFT_STATUS = False
+                    event.handled = True
                     
-            if data2 > 0:
-                if data1 == cons.play_button:              # Play button behavior. It gets back to the start when stop signal is triggered (the same as the space bar action).
+            if event.data1 == cons.play_button:              # Play button behavior. It gets back to the start when stop signal is triggered (the same as the space bar action).
+                event.handled = True
+                if event.data2 > 0:
                     if transport.isPlaying():
                         if var.SHIFT_STATUS:                    # If Shift button is hold, then play button will trigger a pause signal instead of a stop one.
                             transport.start()
                             
                         else:
                             transport.stop()
-                            
                             ui.setHintMsg("Playback stopped!")
+                            event.handled = True
                     else:
                         if var.SHIFT_STATUS:
                             transport.stop()
                             ui.setHintMsg("Playing position reseted!")
+                            event.handled = True
                         else:
                             if ui.isStartOnInputEnabled():
                                 transport.start()
                                 ui.setHintMsg("Waiting for input ...")
+                                event.handled = True
                             else:
                                 transport.start()
                                 ui.setHintMsg("Now playing!")
+                                event.handled = True
                         
-                if data2 > 0:
-                    if data1 == cons.record_button:        # Record button behavior.
+            if event.data1 == cons.record_button:        # Record button behavior.
+                event.handled = True
+                if event.data2 > 0:
                         if var.SHIFT_STATUS == False:
                             if transport.isRecording():
                                 transport.record()
@@ -46,6 +54,7 @@ def TrBehavior(midiId, data1, data2):
                             else:
                                 transport.record()
                                 ui.setHintMsg("Armed for recording!")
+
                         elif var.SHIFT_STATUS: # Shift + Record button behavior. This disables all FX in the mixer, and reenables the previous state when pressed again.
                             if var.fxStatus:
                                 var.fxStatus = 0
