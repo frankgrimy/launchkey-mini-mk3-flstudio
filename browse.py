@@ -3,25 +3,26 @@ import variables as var
 import constants as cons
 import midi, device, ui, transport
 
-def Arrowkeys(midiId, data1, data2):
-    if midiId == midi.MIDI_CONTROLCHANGE:
-        if data1 == cons.shift_DATA1:
-            if data2 == 127:
+def Shift(event):
+    if event.midiId == midi.MIDI_CONTROLCHANGE:
+        if event.data1 == cons.shift_DATA1:
+            event.handled = True
+            if event.data2 == 127:
                 var.SHIFT_STATUS = True
                 #return True
             else:
                 var.SHIFT_STATUS = False
                 #return True
-        """if data2 == 0:                          # Set the buttons release as handled. They have no assigned behavior at release, but setting this status avoids DAW "unhandled" behavior.
-            if data1 == cons.record_button:
-                #return True
-            elif data1 == cons.play_button:
-                #return True
-            elif data1 == cons.shift_DATA1:
-                #return True
-            else:
-                #return False
-        """
+
+def Arrowkeys(midiId, data1, data2):
+    # if midiId == midi.MIDI_CONTROLCHANGE:
+    #     if data1 == cons.shift_DATA1:
+    #         if data2 == 127:
+    #             var.SHIFT_STATUS = True
+    #             #return True
+    #         else:
+    #             var.SHIFT_STATUS = False
+    #             #return True
     if midiId == midi.MIDI_CONTROLCHANGE:
         if var.SHIFT_STATUS:
             device.midiOutMsg(0xb2, 0, 0x69, 0x35)
