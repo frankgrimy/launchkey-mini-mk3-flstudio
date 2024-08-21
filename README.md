@@ -42,8 +42,7 @@ Please read the [Manual](./Info/MANUAL.md).
 
 ## Supported plugins
 
-Currently, the API only supports generator plugins (a.k.a Synths, or the ones that can be loaded in the Channel Rack).
-The script supports the following plugins:
+### Generators
 
 Image-Line plugins:
 
@@ -59,3 +58,18 @@ Third-party plugins:
 - [Pigments 3](https://www.arturia.com/products/software-instruments/pigments/overview)
 - [Surge XT](https://surge-synthesizer.github.io/)
 - [Vital](https://vital.audio/)
+
+### Effects
+
+Image-Line plugins:
+
+- [Control Surface](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/plugins/Control%20Surface.htm): only the first 8 parameters per instance
+- [Frequency Shifter](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/plugins/Frequency%20Shifter.htm)
+- [Fruity Limiter](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/plugins/Fruity%20Limiter.htm)
+- [Fruity Love Philter](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/plugins/Fruity%20Love%20Philter.htm): only X-Y modulation
+- [Fruity Parametric EQ 2](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/plugins/Fruity%20Parametric%20EQ%202.htm): by default controls the seven bands cutoff and global gain. Hold [SHIFT] to control the bandwidth.
+
+Third-party plugins:
+
+- [Kilohearts Gain](https://kilohearts.com/products/gain)
+- [Fabfilter Pro-L 2](https://www.fabfilter.com/products/pro-l-2-limiter-plug-in)
