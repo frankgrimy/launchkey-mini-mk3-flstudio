@@ -4,6 +4,9 @@ from time import time
 from device import isAssigned, midiOutMsg
 from ui import setHintMsg
 from variables import PORT
+from playlist import getPerformanceModeState
+import variables as var
+
 
 def Initialize():
     if isAssigned():
@@ -35,6 +38,6 @@ class Init():
 
         if isAssigned():
             midiOutMsg(0xBF, 0, 0x09, 0x01) # Set the knobs default target to Volume.
-
-
+            var.isPerformance = getPerformanceModeState()
+                
 Startup = Init()

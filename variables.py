@@ -74,3 +74,9 @@ isPushed = 0
 focusedPlugin = ["", None, None] # First item is the plugin name, second is the plugin index1, third is the plugin index2.
 
 isPlaying = None # This variable determines if FL Studio is playing or not.
+
+isPerformance = None # Is performance mode enabled? This is set at startup or if performance mode is enabled inside FL Studio
+setPerformance = 0 # Sets controller to Performance mode if the user requires it
+
+perfPosition = [0, 1] # This variable determines the position of the performance mode rectangle (top left corner) (pad-1, track)
+perfPadsFour = True # This variable determines if the performance mode pads are 4x4 or 8x2
