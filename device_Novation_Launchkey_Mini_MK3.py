@@ -32,7 +32,7 @@ def OnInit():
     Startup.OnInit()
     if var.isPerformance:
         perflights.setLights()
-        perflights.liveZone(0)
+        perflights.liveZone(1)
 
 def OnDeInit():
     QuitFL.OnDeInit()
@@ -42,6 +42,8 @@ def OnRefresh(HW_Dirty_LEDs):
     perfmode.setPerfMode() # Detects if Performance mode is enabled.
     if var.isPerformance:
         perflights.setLights() # Performance mode lights.
+        perflights.liveZone(1) # Performance mode live zone.
+        #print (var.perfPosition)
     #if not var.isPerformance:
     #    mixerlowpads.LowerLights()
     # UpColorsPush() # Up button colors.
@@ -60,6 +62,7 @@ def OnRefresh(HW_Dirty_LEDs):
 
 def OnIdle(): # Functionality that runs in the background. This lets the script to give feedback to the user in real time and in context.
     var.currentTime = time() # Sets the current time for the script.
+    #perflights.liveZone(1)
     Hold(0.250) # Detects if the Scene-up button is being held, during 250 milliseconds.
     
     WindowFocus() # Detects the focused window in FL Studio.

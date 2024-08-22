@@ -2,7 +2,7 @@ import device
 import playlist
 import pads
 import variables as var #perfPosition, SHIFT_STATUS
-from performance.perflights import liveZone
+from performance.perflights import liveZone, setLights
 import colors
 import colPalette as col
 
@@ -38,23 +38,38 @@ def trigger(padhit):
           else:
             device.midiOutMsg(0x90,0,i, 0)
   else:
-    if padhit.data2:
-      for i in range(96, 100):
-        if padhit.data1 == i:
+    for i in range(96, 100):
+      if padhit.data1 == i:
+        if padhit.data2:
           playlist.triggerLiveClip(var.perfPosition[1],i+var.perfPosition[0]-96,2)
-          device.midiOutMsg(0x90,0,i-96, colors.ORANGE1)
-      for i in range(100, 105):
-        if padhit.data1 == i:
+          device.midiOutMsg(0x90,0,i, colors.ORANGE1)
+        else:
+            setLights()
+            #device.midiOutMsg(0x90,0,i, 0)
+    for i in range(100, 105):
+      if padhit.data1 == i:
+        if padhit.data2:
           playlist.triggerLiveClip(var.perfPosition[1]+2,i+var.perfPosition[0]-100,2)
-          device.midiOutMsg(0x90,0,i-96, colors.ORANGE1)
-      for i in range(112, 116):
-        if padhit.data1 == i:
+          device.midiOutMsg(0x90,0,i, colors.ORANGE1)
+        else:
+            setLights()
+            #device.midiOutMsg(0x90,0,i, 0)
+    for i in range(112, 116):
+      if padhit.data1 == i:
+        if padhit.data2:
           playlist.triggerLiveClip(var.perfPosition[1]+1,i+var.perfPosition[0]-112,2)
-          device.midiOutMsg(0x90,0,i-112, colors.ORANGE1)
-      for i in range(116, 120):
-        if padhit.data1 == i:
-          playlist.triggerLiveClip(var.perfPosition[1]+3,i+var.perfPosition[0]-112,2)
-          device.midiOutMsg(0x90,0,i-112, colors.ORANGE1)
+          device.midiOutMsg(0x90,0,i, colors.ORANGE1)
+        else:
+            setLights()
+            #device.midiOutMsg(0x90,0,i, 0)
+    for i in range(116, 120):
+      if padhit.data1 == i:
+        if padhit.data2:
+          playlist.triggerLiveClip(var.perfPosition[1]+3,i+var.perfPosition[0]-116,2)
+          device.midiOutMsg(0x90,0,i, colors.ORANGE1)
+        else:
+            setLights()
+            #device.midiOutMsg(0x90,0,i, 0)
 
       
 
@@ -62,28 +77,54 @@ def trigger(padhit):
   padhit.handled = True
 
 def displayPos(event):
-  if event.midiId == 176:
-    #if var.SHIFT_STATUS:
-      if event.data1 == 104:
-        event.handled = True
-        if event.data2:
-          if var.perfPosition[1] > 1: # Limit the movement to the top
-            var.perfPosition[1] -= 1 # Go up
+  if not var.perfPadsFour:
+    if event.midiId == 176:
+      #if var.SHIFT_STATUS:
+        if event.data1 == 104:
+          event.handled = True
+          if event.data2:
+            if var.perfPosition[1] > 1: # Limit the movement to the top
+              var.perfPosition[1] -= 1 # Go up
+          
+        elif event.data1 == 105:
+          event.handled = True
+          if event.data2:
+            var.perfPosition[1] += 1 # Go down
         
-      elif event.data1 == 105:
-        event.handled = True
-        if event.data2:
-          var.perfPosition[1] += 1 # Go down
-      
-      elif event.data1 == 103:
-        event.handled = True
-        if event.data2:
-          if var.perfPosition[0] > 0: # Limit the movement to the left
-            var.perfPosition[0] -= 8
+        elif event.data1 == 103:
+          event.handled = True
+          if event.data2:
+            if var.perfPosition[0] > 0: # Limit the movement to the left
+              var.perfPosition[0] -= 8
 
-      elif event.data1 == 102:  # Go right
-        event.handled = True
-        if event.data2:
-          var.perfPosition[0] += 8
-      liveZone(0) # Performance mode position highlight.
+        elif event.data1 == 102:  # Go right
+          event.handled = True
+          if event.data2:
+            var.perfPosition[0] += 8
+        liveZone(1) # Performance mode position highlight.
   
+  else:
+    if event.midiId == 176:
+      #if var.SHIFT_STATUS:
+        if event.data1 == 104:
+          event.handled = True
+          if event.data2:
+            if var.perfPosition[1] > 4: # Limit the movement to the top
+              var.perfPosition[1] -= 4
+            
+        elif event.data1 == 105:
+          event.handled = True
+          if event.data2:
+            var.perfPosition[1] += 4 # Go down
+          
+        elif event.data1 == 103:
+          event.handled = True
+          if event.data2:
+            if var.perfPosition[0] > 3: # Limit the movement to the left
+              var.perfPosition[0] -= 4
+              
+        elif event.data1 == 102:  # Go right
+          event.handled = True
+          if event.data2:
+            var.perfPosition[0] += 4
+        liveZone(1)
