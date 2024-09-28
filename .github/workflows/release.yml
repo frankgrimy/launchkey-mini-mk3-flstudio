@@ -19,7 +19,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          tag: ${{ github.ref }}
+          tag_name: ${{ github.ref }}
           files: Launchkey-Mini-MK3-FLStudio-${GITHUB_REF#refs/tags/v}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
