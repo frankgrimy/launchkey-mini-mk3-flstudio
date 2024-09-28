@@ -23,7 +23,7 @@ jobs:
           script: |
             const fs = require('fs');
             const releaseNotes = fs.readFileSync('RELEASE_NOTES.md', 'utf8');
-            return { releaseNotes };
+            core.setOutput('releaseNotes', releaseNotes);
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
