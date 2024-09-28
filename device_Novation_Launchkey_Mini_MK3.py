@@ -26,12 +26,12 @@ from longPress import Hold
 #import plugins
 from performance import *
 import colPalette as col
-
+from performance import perflights
 
 def OnInit():
     Startup.OnInit()
     if var.isPerformance:
-        perflights.setLights()
+        #perflights.setLights()
         perflights.liveZone(1)
 
 def OnDeInit():
@@ -40,9 +40,9 @@ def OnDeInit():
 def OnRefresh(HW_Dirty_LEDs):
     fxDetect.pluginInfo().OnRefresh() # Sets var.focusedPlugin to the active effect in the mixer, including its coordinates.
     perfmode.setPerfMode() # Detects if Performance mode is enabled.
-    if var.isPerformance:
-        perflights.setLights() # Performance mode lights.
-        perflights.liveZone(1) # Performance mode live zone.
+    #if var.isPerformance:
+    #    perflights.setLights() # Performance mode lights.
+        #perflights.liveZone(1) # Performance mode live zone.
         #print (var.perfPosition)
     #if not var.isPerformance:
     #    mixerlowpads.LowerLights()
@@ -85,6 +85,9 @@ def OnIdle(): # Functionality that runs in the background. This lets the script 
         #plctrl.MuteLights()   
         ShortLights() # Lights for shortcuts in Editor mode.
         peakMonitor() # Peak meter monitor (Editor mode).
+
+    else:
+        perflights.setLights() # Performance mode lights.
 
 
 
