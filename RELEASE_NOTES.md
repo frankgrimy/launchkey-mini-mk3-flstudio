@@ -1,0 +1,2 @@
+- Added initial support for Performance Mode
+- Added automatic color detection in multiple contexts

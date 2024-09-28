@@ -15,11 +15,21 @@ jobs:
 
       - name: Compress files as zip
         run: zip -r Launchkey-Mini-MK3-FLStudio-${{ github.ref_name }}.zip . -x .git/\* .github/\* .gitignore README.md Info/\*
-      
+
+      - name: Read release notes
+        id: read_release_notes
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const fs = require('fs');
+            const releaseNotes = fs.readFileSync('RELEASE_NOTES.md', 'utf8');
+            return { releaseNotes };
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref_name }}
           files: Launchkey-Mini-MK3-FLStudio-${{ github.ref_name }}.zip
+          body: ${{ steps.read_release_notes.outputs.releaseNotes }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
