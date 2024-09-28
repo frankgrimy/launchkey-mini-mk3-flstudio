@@ -1,0 +1,25 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Compress files as zip
+        run: zip -r Launchkey-Mini-MK3-FLStudio-${GITHUB_REF#refs/tags/v}.zip . -x .git/\* .github/\* .gitignore README.md
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag: ${{ github.ref }}
+          files: Launchkey-Mini-MK3-FLStudio-${GITHUB_REF#refs/tags/v}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
