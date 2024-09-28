@@ -11,7 +11,7 @@ This script should be compatible with the latest FL Studio version, for both Win
 
 ## Installation
 
-Download the code and copy it in the FL Studio [__User Data Folder__](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/envsettings_files.htm#userdata)/Settings/Hardware.
+Download the latest release zip file, and extract it in the FL Studio [__User Data Folder__](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/envsettings_files.htm#userdata)/Settings/Hardware.
 
 For Windows, if you haven't modified FL Studio's default User Data Folder, you can copy this address and access it from the File Explorer address bar:
 > %USERPROFILE%\Documents\Image-Line\FL Studio\Settings\Hardware
@@ -19,16 +19,16 @@ For Windows, if you haven't modified FL Studio's default User Data Folder, you c
 ## Configuration
 
 Have in mind that this device __has two MIDI input/output pairs__. One controls the _Standalone (MIDI) mode_ (which lets you to use the keyboard) and the other control the __DAW mode__ (the responsible for the most functions this script offers).
-Also, according to your OS and/or other settings, the device naming might differ.
+Also, according to your OS and/or other settings, the device naming might be different.
 
-After copying the script, you now have to set up FL Studio.
+After extracting the script, you now have to set up FL Studio.
 
 1. Connect your device to your computer and start FL Studio.
 2. Go to FL Studio [MIDI settings](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/envsettings_midi.htm).
-3. Configure the ports so each MIDI IN/OUT pairs are set to the same port. Note that in the screenshot below, the DAW mode pair is set to use __MIDI port 10__, while the Standalone mode uses MIDI port 20.
+3. Configure the ports so each MIDI IN/OUT pairs are set to the same port. Note that in the screenshot below, the DAW mode pair is set to use __MIDI port 10__, while the Standalone mode uses MIDI port 20. Make sure to use a free port number, if you have other devices connected.
 4. Select the DAW MIDI port in the Input list and choose the script ___Novation Launchkey Mini MK3 (by Frank Grimy)___ from the __Controller type__ dropdown list,
-5. (Optional) Set the Standalone MIDI device to use the __(generic controller)__. This will let you use the MIDI keyboard as usual.
-6. (Optional) Enable _Send master sync_ option for the DAW output device. This makes FL Studio send a MIDI clock signal to the controller, that syncs its lighting to the BPM of the current project.
+5. (Recommended) Set the Standalone MIDI device to use the __(generic controller)__. This will let you use the MIDI keyboard as usual.
+6. (Recommended) Enable _Send master sync_ option for the DAW output device. This makes FL Studio send a MIDI clock signal to the controller, that syncs its lighting to the BPM of the current project.
 
 If you did it all good, the device pads might change colors and you'll be ready to enjoy the script.
 
